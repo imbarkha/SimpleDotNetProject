@@ -21,8 +21,17 @@ jobs:
         with:
           dotnet-version: '8.x'
 
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
+#      - name: Build with dotnet
+#        run: dotnet build --configuration Release
+
+      - name: Restore dependencies
+        run: dotnet restore "C:\Users\Barkha Sharma\myapp\SimpleDotNetProject\SimpleDotNetProject.csproj"
+
+      - name: Build
+        run: dotnet build "C:\Users\Barkha Sharma\myapp\SimpleDotNetProject\SimpleDotNetProject.csproj" --configuration Release --no-restore
+
+      - name: Publish
+        run: dotnet publish "C:\Users\Barkha Sharma\myapp\SimpleDotNetProject\SimpleDotNetProject.csproj" -c Release -o "${{ env.DOTNET_ROOT }}\myapp"
 
       - name: dotnet publish
         run: dotnet publish "C:\Users\Barkha Sharma\myapp\SimpleDotNetProject\SimpleDotNetProject.csproj" -c Release -o ${{env.DOTNET_ROOT}}\myapp
